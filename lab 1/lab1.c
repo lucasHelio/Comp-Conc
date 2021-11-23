@@ -20,12 +20,13 @@
 #include <pthread.h>
 
 #define NTHREADS 2
-#define TAMANHOVETOR 10000
+#define TAMANHOVETOR 10
 
 int vetor[TAMANHOVETOR];
 
 //função que eleva ao quadrado
-void * expoente2(void * arg){
+void * expoente2(void * arg)
+{
     int ident = *(int *)arg;
 
     if(ident == 1)
@@ -65,9 +66,16 @@ int main()
     }
 
 
-    //imprime o vetor elevado ao quadrado
-    for(int i=0; i<TAMANHOVETOR;i++){
+    
+
+    //verifica e imprime o vetor elevado ao quadrado
+    for(int i=0; i<TAMANHOVETOR;i++)
+    {
         printf("vetor[%d] = %d\n", i, vetor[i]);
+        if (vetor[i]!= pol(i+1, 2))
+        {
+            printf("o numero ta errado\n"); break;
+        }
     }
 
     //pthread_exit(NULL);
