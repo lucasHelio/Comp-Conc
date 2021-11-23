@@ -70,6 +70,6 @@ int main()
         printf("vetor[%d] = %d\n", i, vetor[i]);
     }
 
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
     return 0;
 }
