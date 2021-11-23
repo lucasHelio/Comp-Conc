@@ -1,20 +1,19 @@
 
 //atividade 5
 /**
+ * Aluno: Lucas Hélio Silva Ramos
+ * Dre: 117080795
+ * 
+ * Disciplina: Computação concorrente
+ * Prof: Silvana Rossetto
+ * 
+ * 
  * Objetivo: Implementar um programa concorrente, com 
  * duas threads (alem da thread principal), para elevar 
  * ao quadrado cada elemento de um vetor de 10000 
  * elementos. (Para cada elemento (ai) do vetor, 
  * calcular (ai)^2 e escrever o resultado na mesma 
  * posição do elemento.)
- */
-
-
-/**
- * bugs:
- * descobrir pq ident n esta passando o valor esperado
- * 
- * Como dividir a tarefa em dois threads?
  */
 
 #include<stdio.h>
@@ -51,8 +50,7 @@ int main()
     
     
 
-    //temos dois threads que fariam a função de elevar // pensar em como resolver
-    //elementos do vetor ao quadrado
+    //temos dois threads que fariam a função de elevar 
     for(int i =0;i<NTHREADS;i++)
     {
         ident[i]= i+1;
@@ -67,7 +65,7 @@ int main()
     }
 
 
-    //teste
+    //imprime o vetor elevado ao quadrado
     for(int i=0; i<TAMANHOVETOR;i++){
         printf("vetor[%d] = %d\n", i, vetor[i]);
     }
