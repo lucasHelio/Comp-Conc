@@ -13,8 +13,8 @@
     float limiteSuperior;
     
 //contadores de valores encontrados
-    int valoresEncontradosSeq=0;
-    int valoresEncontradosConc=0;
+    long int valoresEncontradosSeq=0;
+    long int valoresEncontradosConc=0;
 
 //Numero de threads definido na chamada do programa
     int NTHREADS;
@@ -34,11 +34,13 @@ void * multiThread(void * arg)
         {
             if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
             {
-                valoresEncontradosConc++;
+                somaLocal++;
+                //valoresEncontradosConc++;
                 printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
-                pthread_exit((void *)somaLocal);
+                //pthread_exit((void *)somaLocal);
             }
         }
+        pthread_exit((void *)somaLocal);
     }
     else
     {
@@ -47,11 +49,13 @@ void * multiThread(void * arg)
         {
             if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
             {   
-                valoresEncontradosConc++;
+                somaLocal++;
+                //valoresEncontradosConc++;
                 printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
-                pthread_exit((void *)somaLocal);
+                //pthread_exit((void *)somaLocal);
             }
         }
+        pthread_exit((void *)somaLocal);
     }
     pthread_exit(NULL);
 }
@@ -73,6 +77,7 @@ void contaConcorrente()
     pthread_t tid[NTHREADS];
     int ident[NTHREADS];
     //void *status=0;
+    long int status=0;
 
     for(int i=0; i<NTHREADS;i++)
     {
@@ -81,10 +86,11 @@ void contaConcorrente()
     }
     for(int i=0; i<NTHREADS;i++)
     {
-        //if(pthread_join(tid[i], &status))
-        if(pthread_join(tid[i], NULL))
+        if(pthread_join(tid[i], (void **) &status))
+        //if(pthread_join(tid[i], NULL))
         printf("Erro: pthread create - tid[%d] = %lu", i, tid[i]);
         //if (status!=NULL)valoresEncontradosConc++;
+        valoresEncontradosConc+=status;
     }
     return;
 }
@@ -131,8 +137,8 @@ int main(int argc, char *argv[])
     GET_TIME(finish);
     tempo_concorrente = finish-start;
 
-    printf("tempo de execução sequencial: %e\nvalores encontrados no intervalo: %d\n\n", tempo_sequencial, valoresEncontradosSeq);
-    printf("tempo de execução Concorrente: %e\nvalores encontrados no intervalo: %d\n", tempo_concorrente, valoresEncontradosConc);
+    printf("tempo de execução sequencial: %e\nvalores encontrados no intervalo: %ld\n\n", tempo_sequencial, valoresEncontradosSeq);
+    printf("tempo de execução Concorrente: %e\nvalores encontrados no intervalo: %ld\n", tempo_concorrente, valoresEncontradosConc);
 
     free(vetor);
 
