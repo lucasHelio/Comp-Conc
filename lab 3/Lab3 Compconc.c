@@ -33,7 +33,10 @@ void * multiThread(void * arg)
         for(int i=0;i<razao;i++)
         {
             if(vetor[i]>limiteInferior && vetor[i]<limiteSuperior)
+            {
                 valoresEncontradosConc++;
+                printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+            }
         }
     }
     else
@@ -42,7 +45,10 @@ void * multiThread(void * arg)
         for(int i=(idThread-1)*razao; i<limite;i++)
         {
             if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
+            {   
                 valoresEncontradosConc++;
+                printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+            }
         }
     }
     pthread_exit(NULL);
@@ -53,7 +59,10 @@ void contaSequencial()
     for(int i=0; i<TAMANHO; i++)
     {
         if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
+        {   
             valoresEncontradosSeq++;
+            printf("[SEQUENCIAL]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+        }
     }
 }
 
