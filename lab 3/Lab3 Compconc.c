@@ -35,9 +35,7 @@ void * multiThread(void * arg)
             if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
             {
                 somaLocal++;
-                //valoresEncontradosConc++;
-                printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
-                //pthread_exit((void *)somaLocal);
+                //printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
             }
         }
         pthread_exit((void *)somaLocal);
@@ -50,14 +48,11 @@ void * multiThread(void * arg)
             if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
             {   
                 somaLocal++;
-                //valoresEncontradosConc++;
-                printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
-                //pthread_exit((void *)somaLocal);
             }
         }
         pthread_exit((void *)somaLocal);
     }
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
 }
 
 void contaSequencial()
@@ -67,7 +62,7 @@ void contaSequencial()
         if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
         {   
             valoresEncontradosSeq++;
-            printf("[SEQUENCIAL]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+            //printf("[SEQUENCIAL]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
         }
     }
 }
@@ -109,12 +104,12 @@ int main(int argc, char *argv[])
     
 
     //inicialização do vetor
-    printf("vetor inicializado:\n");
+    //printf("vetor inicializado:\n");
     vetor = malloc(TAMANHO * sizeof(float));
     for(int i=0; i<TAMANHO;i++)
     {
         vetor[i]=rand()%100;
-        printf("vetor[%d]: %f\n", i, vetor[i]);
+        //printf("vetor[%d]: %f\n", i, vetor[i]);
     }
 
     
