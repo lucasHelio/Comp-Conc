@@ -25,17 +25,18 @@
 void * multiThread(void * arg)
 {
     int idThread = *(int *)arg;
-
+    long int somaLocal=0;
     int razao = TAMANHO/NTHREADS;
 
     if(idThread == 1)
     {
         for(int i=0;i<razao;i++)
         {
-            if(vetor[i]>limiteInferior && vetor[i]<limiteSuperior)
+            if(vetor[i]>=limiteInferior && vetor[i]<=limiteSuperior)
             {
                 valoresEncontradosConc++;
                 printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+                pthread_exit((void *)somaLocal);
             }
         }
     }
@@ -48,6 +49,7 @@ void * multiThread(void * arg)
             {   
                 valoresEncontradosConc++;
                 printf("[CONCORRENTE]Valor encontrado: vetor[%d]: %f\n", i, vetor[i]);
+                pthread_exit((void *)somaLocal);
             }
         }
     }
@@ -70,6 +72,7 @@ void contaConcorrente()
 {
     pthread_t tid[NTHREADS];
     int ident[NTHREADS];
+    //void *status=0;
 
     for(int i=0; i<NTHREADS;i++)
     {
@@ -78,8 +81,10 @@ void contaConcorrente()
     }
     for(int i=0; i<NTHREADS;i++)
     {
+        //if(pthread_join(tid[i], &status))
         if(pthread_join(tid[i], NULL))
         printf("Erro: pthread create - tid[%d] = %lu", i, tid[i]);
+        //if (status!=NULL)valoresEncontradosConc++;
     }
     return;
 }
@@ -128,6 +133,8 @@ int main(int argc, char *argv[])
 
     printf("tempo de execução sequencial: %e\nvalores encontrados no intervalo: %d\n\n", tempo_sequencial, valoresEncontradosSeq);
     printf("tempo de execução Concorrente: %e\nvalores encontrados no intervalo: %d\n", tempo_concorrente, valoresEncontradosConc);
+
+    free(vetor);
 
     return 0;
 }
