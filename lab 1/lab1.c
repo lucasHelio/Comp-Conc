@@ -2,7 +2,7 @@
 //atividade 5
 /**
  * Aluno: Lucas Hélio Silva Ramos
- * Dre: 117080795
+ * 
  * 
  * Disciplina: Computação concorrente
  * Prof: Silvana Rossetto
