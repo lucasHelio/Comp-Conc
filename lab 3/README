@@ -1,0 +1,98 @@
+Aluno: Lucas Hélio Silva Ramos
+
+Computação Concorrente - Cursado no período de 21.2
+
+Implementação e avaliação de aplicações concorrentes
+
+No trabalho apresentado foi requisitado a construção de 
+um programa. Este, que encontre a quantidade de valores 
+float, em um Vetor aleatório, em um intervalo definido pelo 
+proprio usuário.
+
+Foi pedida uma solução sequencial e uma solução concorrente.
+
+O programa espera que na sua chamada seja passado o tamanho 
+do vetor de elementos, e o numero de threads que seria 
+utilizado no metodo Concorrente. Do seguinte modo:
+./nomeDoPrograma tamanhoVetor nThreads
+
+o programa foi avaliado com os seguintes valores:
+
+10⁵ elementos e 1 thread,
+10⁵ elementos e 2 threads,
+10⁵ elementos e 4 threads,
+
+10⁷ elementos e 1 thread,
+10⁷ elementos e 2 threads,
+10⁷ elementos e 4 threads,
+
+10⁸ elementos e 1 thread,
+10⁸ elementos e 2 threads,
+10⁸ elementos e 4 threads,
+
+A seguir veremos a coleta de dados sobre o tempo (segundos) que cada método 
+levou para executar sua função com o número de elementos especificado.
+
+n-E(Elementos) | n-T(Threads)
+
+                Sequencial          Concorrente          Aceleração Obtida  
+
+10⁵-E|1-T:  (1.221651 * 10⁻³)     (1.658049 * 10⁻³)         (0.736800)
+
+10⁵-E|2-T:  (1.204929 * 10⁻³)     (9.615330 * 10⁻⁴)         (1.253133)
+
+10⁵-E|4-T:  (1.220919 * 10⁻³)     (6.562800 * 10⁻⁴)         (1.860362)
+
+
+10⁷-E|1-T:  (7.017334 * 10⁻²)     (6.818440 * 10⁻²)         (1.029170)
+
+10⁷-E|2-T:  (7.219483 * 10⁻²)     (3.905653 * 10⁻²)         (1.848470)
+
+10⁷-E|4-T:  (7.454019 * 10⁻²)     (2.413318 * 10⁻²)         (3.088701)
+
+
+10⁸-E|1-T:  (6.478794 * 10⁻¹)     (6.190817 * 10⁻¹)         (1.046516)
+
+10⁸-E|2-T:  (6.392263 * 10⁻¹)     (3.191847 * 10⁻¹)         (2.002684)
+
+10⁸-E|4-T:  (6.486003 * 10⁻¹)     (1.648877 * 10⁻¹)         (3.933588)
+
+
+Pode se observar que o aumento de threads deixa o programa mais efetivo
+quando se possui um numero maior de elementos, de 10⁷ para cima, alcançando
+resultados melhores de aceleração.
+
+Em contra partida, para valores menores, de elementos e threads, a diferença 
+de tempo não é tão grande, chegando a ser mais lento no caso de 10⁵ elementos 
+e 1 thread.
+
+Chegasse a conclussão que ambos os métodos podem ser eficientes e cada um seria
+mais indicado dependendo da quantidade de dados a ser processada.
+
+Processador utilizado:
+Arquitetura:                     x86_64
+Modo(s) operacional da CPU:      32-bit, 64-bit
+Ordem dos bytes:                 Little Endian
+Address sizes:                   43 bits physical, 48 bits virtual
+CPU(s):                          16
+Lista de CPU(s) on-line:         0-15
+Thread(s) per núcleo:            2
+Núcleo(s) por soquete:           8
+Soquete(s):                      1
+Nó(s) de NUMA:                   1
+ID de fornecedor:                AuthenticAMD
+Família da CPU:                  23
+Modelo:                          8
+Nome do modelo:                  AMD Ryzen 7 2700X Eight-Core Processor
+Step:                            2
+Frequency boost:                 enabled
+CPU MHz:                         2200.000
+CPU MHz máx.:                    3700,0000
+CPU MHz mín.:                    2200,0000
+BogoMIPS:                        7385.26
+Virtualização:                   AMD-V
+cache de L1d:                    256 KiB
+cache de L1i:                    512 KiB
+cache de L2:                     4 MiB
+cache de L3:                     16 MiB
+CPU(s) de nó0 NUMA:              0-15
