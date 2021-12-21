@@ -14,12 +14,13 @@ void * Multithread(void * arg)
 {
     int numThread = *(int *)arg;
     
-    
+    //thread 5
     if (numThread==5)
     {
          
         printf("Seja bem-vindo!\n");
         contador++;
+        //envia um sinal para as threads continuarem, avisando q a thread 5 já printou.
         pthread_cond_broadcast(&x_cond);
         
     }
@@ -27,6 +28,7 @@ void * Multithread(void * arg)
     
     else
     {
+        //espera a thread 5 ser executada para continuar
         pthread_mutex_lock(&x_mutex);
         if(contador ==0)
         {
@@ -36,53 +38,50 @@ void * Multithread(void * arg)
         }
         pthread_mutex_unlock(&x_mutex);
         
+        //thread 2
         pthread_mutex_lock(&x_mutex);
-        
         if(numThread == 2)
         {
-            //pthread_mutex_lock(&x_mutex);
             printf("Fique a vontade.\n");
             contador++;
-            //pthread_mutex_unlock(&x_mutex);
-            //pthread_exit(NULL);
         }
         pthread_mutex_unlock(&x_mutex);
 
+        //thread 3
         pthread_mutex_lock(&x_mutex);
         if(numThread == 3)
         {
-            //pthread_mutex_lock(&x_mutex);
             printf("Sente-se por favor.\n");
             contador++;
-            //pthread_mutex_unlock(&x_mutex);
-            //pthread_exit(NULL);
         }
         pthread_mutex_unlock(&x_mutex);
 
 
+        //thread 4
         pthread_mutex_lock(&x_mutex);
         if(numThread == 4)
         {
-            //pthread_mutex_lock(&x_mutex);
+            
             printf("Aceita um copo d'água?\n");
             contador++;
-            //pthread_mutex_unlock(&x_mutex);
-            //pthread_exit(NULL);
+            
         }
         pthread_mutex_unlock(&x_mutex);
         
-        pthread_mutex_lock(&x_mutex);    
+        pthread_mutex_lock(&x_mutex);   
+        //espera todas as threads printarem para poder executar a thread 1
         if (contador<4){
-            //pthread_mutex_lock(&x_mutex);
+            
             pthread_cond_wait(&x_cond, &x_mutex);
             pthread_mutex_unlock(&x_mutex);
         }
         pthread_mutex_unlock(&x_mutex);
 
+        //libera o wait para a thread 1 ser executada
         pthread_mutex_lock(&x_mutex);
         if(contador == 4)
         {
-            //pthread_cond_signal(&x_cond);
+            
             pthread_cond_broadcast(&x_cond);
             pthread_mutex_unlock(&x_mutex);
             //ativa a thread 1 para ser ultima a printar
@@ -90,7 +89,7 @@ void * Multithread(void * arg)
         pthread_mutex_unlock(&x_mutex);
         
         
-
+        //mensagem da thread 1, ultima a ser executada
         if(numThread==1 && contador == 4)
         {
             printf("Volte sempre!\n");
@@ -112,13 +111,14 @@ int main()
     pthread_mutex_init(&x_mutex, NULL);
     pthread_cond_init(&x_cond, NULL);
     
-
+    //cria as threads e manda elas executarem a função Multithread
     for(int i=0; i<NTHREADS; i++)
     {
         ident[i] = i+1;
         pthread_create(&tid[i], NULL, Multithread, (void *)&ident[i]);
     }
 
+    //espera o retorno das threads
     for(int i=0; i<NTHREADS; i++)
     {
         if(pthread_join(tid[i], NULL))
