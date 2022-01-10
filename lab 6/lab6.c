@@ -46,9 +46,11 @@ void * funcaoMultithread(void * arg)
     //as N iterações
     for(int k=0; k<nIteracoes;k++)
     {   
+        printf("vetor[%d]: %d\n", ident-1, vetor[ident-1]);
         //somatorio de valores no vetor
-        for(int i=0; i<nThreads;i++)
+        for(int i=0; i<nThreads;i++){
             somatorio+=vetor[i];
+            printf("Thread numero %d somatorio = %d\n", ident, somatorio);
         
         //espera as outras threads terminarem
         sincronizaThread();
