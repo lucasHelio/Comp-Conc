@@ -73,7 +73,7 @@ int Retira (int id) {
     ImprimeBuffer(N);
     
     out++;
-    if(out!=5)
+    if(out!=N)
         sem_post(&mutexCons);
 
     return item;
