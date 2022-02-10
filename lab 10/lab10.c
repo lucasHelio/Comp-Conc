@@ -159,10 +159,6 @@ int main(int argc, char *argv[]) {
     //inicializa o Buffer
     IniciaBuffer(N);  
 
-    //inicializa as variaveis de sincronizacao
-    pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&cond_cons, NULL);
-    pthread_cond_init(&cond_prod, NULL);
 
     //cria as threads produtoras
     for(i=0; i<P; i++) {
